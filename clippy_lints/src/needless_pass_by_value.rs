@@ -126,7 +126,7 @@ impl<'a, 'tcx> LateLintPass<'a, 'tcx> for NeedlessPassByValue {
                         match_type(cx, ty, &paths::VEC),
                         let TyPath(QPath::Resolved(_, ref path)) = input.node,
                         let Some(elem_ty) = path.segments.iter()
-                            .find(|seg| &*seg.name.as_str() == "Vec")
+                            .find(|seg| *seg.name.as_str() == *"Vec")
                             .map(|ps| ps.parameters.types()[0]),
                     ], {
                         let slice_ty = format!("&[{}]", snippet(cx, elem_ty.span, "_"));
